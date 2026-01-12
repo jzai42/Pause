@@ -1,0 +1,11 @@
+{
+  "name": "Stilll",
+  "short_name": "Pause",
+  "description": "A minimalist life pause button.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "requestFramePermissions": [],
+  "ios_status_bar": "black-translucent"
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Stilll" />
+    <title>Stilll — Pause</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --safe-area-inset-top: env(safe-area-inset-top, 0px);
+        --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      html, body, #root {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+      }
+
+      /* 核心修复：使用 text-shadow 代替 drop-shadow 以消除移动端矩形渲染块 */
+      .text-shadow-zen {
+        text-shadow: 0 8px 20px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      @keyframes pop-ring {
+        0% { transform: scale(0.8); opacity: 0.8; border-width: 10px; }
+        100% { transform: scale(2.5); opacity: 0; border-width: 0px; }
+      }
+      
+      @keyframes sway {
+        0% { transform: translateX(0) skewX(0); }
+        50% { transform: translateX(15px) skewX(1deg); }
+        100% { transform: translateX(0) skewX(0); }
+      }
+
+      @keyframes snoot-breath {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+
+      @keyframes nostril-l {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-4px); }
+        100% { transform: translateX(0); }
+      }
+
+      @keyframes nostril-r {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(4px); }
+        100% { transform: translateX(0); }
+      }
+
+      @keyframes slide-up {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes firework-line {
+        0% { transform: rotate(var(--angle)) translateY(0) scaleY(0); opacity: 1; }
+        30% { transform: rotate(var(--angle)) translateY(0) scaleY(1.5); opacity: 1; }
+        100% { transform: rotate(var(--angle)) translateY(var(--distance)) scaleY(0); opacity: 0; }
+      }
+
+      .animate-pop-ring { animation: pop-ring 0.9s cubic-bezier(0, 0, 0.2, 1) forwards; }
+      .animate-sway { animation: sway 10s ease-in-out infinite; }
+      .animate-snoot-breath { animation: snoot-breath 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+      .animate-nostril-l { animation: nostril-l 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+      .animate-nostril-r { animation: nostril-r 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+      .animate-slide-up { animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
+      .animate-firework { animation: firework-line 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+      .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+      
+      * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
