@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { usePause } from './hooks/usePause';
 import { useTheme } from './hooks/useTheme';
@@ -89,7 +88,7 @@ export default function App() {
   const startTimeRef = useRef<number>(0);
   const isPointerDownRef = useRef(false);
 
-  const currentTheme = themes[theme];
+  const currentTheme = themes[theme as keyof typeof themes] || themes.pink;
 
   const generateZenKoan = async (durationSec: number) => {
     setIsGenerating(true);
@@ -265,4 +264,30 @@ export default function App() {
                
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-white/5 rounded-[2rem] p-6 border border-white/5">
-                    
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-1">Total</p>
+                    <p className="text-3xl font-black">{stats.totalCount}</p>
+                  </div>
+                  <div className="bg-white/5 rounded-[2rem] p-6 border border-white/5">
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-1">Zen Time</p>
+                    <p className="text-3xl font-black">{(stats.totalDuration / 1000).toFixed(0)}s</p>
+                  </div>
+               </div>
+
+               <div className="flex flex-col gap-2 mb-8">
+                  <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-2 px-2">History</p>
+                  {history.length === 0 ? <p className="text-sm opacity-30 italic px-2">A blank canvas...</p> : 
+                    [...history].reverse().slice(0, 5).map((session, i) => (
+                      <div key={i} className="flex justify-between items-center px-4 py-3 bg-white/5 rounded-2xl">
+                          <span className="font-bold text-sm opacity-60">{new Date(session.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                          <span className="font-black text-xs opacity-90">{session.duration > 0 ? (session.duration/1000).toFixed(1) + 's' : 'Tap'}</span>
+                      </div>
+                    ))
+                  }
+               </div>
+               <button onClick={() => setIsStatsOpen(false)} className="w-full py-5 bg-white text-black font-black rounded-3xl active:scale-[0.98]">Close</button>
+            </div>
+         </div>
+       )}
+    </div>
+  );
+}
